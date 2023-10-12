@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Загрузка свободы</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        function update(){
+            let today=new Date();
+            let b=parseInt((today.getHours()*60)+today.getMinutes())
+            let a=document.getElementById("progressbar")
+            let c=document.getElementById("lab")
+            let p=document.getElementById("percent")
+
+            if(b<9*60){
+                c.innerHTML="ТЫ СВОБОДЕН, НО ДО НАЧАЛА СТРАДАНИЙ ОСТАЛОСЬ " + parseInt((9*60-b)/60) + " ЧАСОВ " + (60-today.getMinutes()) + " МИНУТ (если не выходной, конечно)"
+                a.value=100
+                p.innerHTML="100%"
+            }
+            else if(b>20*60){
+                c.innerHTML="ТЫ СВОБОДЕН, НО ДО НАЧАЛА СТРАДАНИЙ ОСТАЛОСЬ " + parseInt((24*60-b+9*60)/60) +" ЧАСОВ " + (60-today.getMinutes()) + " МИНУТ (если не выходной, конечно)"
+                a.value=100
+                p.innerHTML="100%"
+            }
+            else{
+            c.innerHTML="Ваша свобода загружается, осталось "+parseInt((today.getHours()*60-b)/60) + " часов " + (60-today.getMinutes()) + " минут"
+            a.value=parseInt((b-9*60)/(11*60)*100)
+            p.innerHTML=parseInt((b-9*60)/(11*60)*100)+"%"
+        }
+        }
+        setInterval(update, 1000)
+    </script>
+</head>
+<body>
+    <label id="lab">Ваша свобода загружается, осталось</label><br>
+    <div class="demo-wrapper html5-progress-bar">
+        <div class="progress-bar-wrapper">
+            <progress id="progressbar" value="0" max="100"></progress>
+            <span id="percent">0%</span>
+        </div>
+    </div>
+</body>
+</html>
